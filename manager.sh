@@ -278,6 +278,7 @@ if [[ $start == "true" ]]; then
 	else
 		if ! screen -list | grep -q "$startserver"; then
 			cd ./servers/$startserver
+			rm -rf cache
 			screen -dmS $startserver ../../fxdata/run.sh +exec config.cfg
 			cd ../../
 			whiptail --title "SUCCESS" --msgbox "Server started." 10 60
@@ -351,6 +352,7 @@ if [[ $restart == "true" ]]; then
 		if screen -list | grep -q "$restart"; then
 			screen -S $restart -X at "#" stuff ^C
 			cd ./servers/$restart
+			rm -rf cache
 			screen -dmS $restart ../../fxdata/run.sh +exec config.cfg
 			cd ../../
 			whiptail --title "SUCCESS" --msgbox "Server restarted." 10 60
